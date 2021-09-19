@@ -6,7 +6,7 @@ outputlogic:
   output_1 : [0,0,0,0,0,0,0,0]
   output_2 : [0,0,0,0,0,0,0,0]
   output_3 : [0,0,0,0,0,0,0,0]
-  output_4 : [0,0,0,0,0,0,0,0]
+  output_4 : [4294967295,4294967295,4294967295,4294967295,0,0,0,0]
 updateParams : 0
-pauseCount : 0
+pauseCount : 1
 ...
