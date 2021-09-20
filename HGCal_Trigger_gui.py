@@ -564,8 +564,18 @@ class MainWindow(QMainWindow):
 		self.truth_4_6 = self.all_truthtables[3][1]
 		self.truth_4_7 = self.all_truthtables[3][0]
 
+		print(self.truth_1_0)
+		print(self.truth_1_1)
+		print(self.truth_1_2)
+		print(self.truth_1_3)
+		print(self.truth_1_4)
+		print(self.truth_1_5)
+		print(self.truth_1_6)
+		print(self.truth_1_7)
+
 		self.updateParams = 1 # updating configuration also resets counter
 		self.send_bitstream()
+
 
 		# Change Button visibilities
 		self.pause_btn.setText("Pause Counter")
