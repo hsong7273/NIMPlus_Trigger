@@ -507,7 +507,7 @@ class MainWindow(QMainWindow):
 			dac_i += (i)*2**12 # dacData is at most 4096, reserving 4 digits is safe
 			self.dacData.append(dac_i)
 		
-		# print(self.dacData)
+		print(self.dacData)
 
 		# Handle booleans; loop over each bool_box
 		self.all_truthtables = []
@@ -536,6 +536,10 @@ class MainWindow(QMainWindow):
 		self.truth_1_5 = self.all_truthtables[0][2]
 		self.truth_1_6 = self.all_truthtables[0][1]
 		self.truth_1_7 = self.all_truthtables[0][0]
+		print(self.all_truthtables[0])
+		print(self.all_truthtables[1])
+		print(self.all_truthtables[2])
+		print(self.all_truthtables[3])
 		# Output 2
 		self.truth_2_0 = self.all_truthtables[1][7]
 		self.truth_2_1 = self.all_truthtables[1][6]

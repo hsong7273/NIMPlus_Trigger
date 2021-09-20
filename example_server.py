@@ -49,12 +49,9 @@ async def config_nimplus(request):
 	# writer.write(bytestream)
 	config_sock.send(bytestream)
 	if 'countp' not in app:
-		print('no countp')
 		app['countp'] = Process(target=app['counter'])
 		app['countp'].start()
 
-
-	
 	return web.Response(text='Configured NimPlus')
 
 

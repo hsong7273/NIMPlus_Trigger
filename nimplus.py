@@ -14,7 +14,7 @@ class NimPlusConfig():
 		# Read given yaml file
 		with open(yamlfile, 'r') as yfile:
 			self.config = yaml.load(yfile, Loader=SafeLoader)
-		# print(self.config)
+			# print(self.config)
 
 	def getConfig(self):
 		return self.config
@@ -25,7 +25,6 @@ class NimPlusConfig():
 		thresholds = self.config['thresholds']
 		# convert to mV
 		thresholds = [i/1000. for i in thresholds]
-		# print(thresholds)
 		for i in range(8): # set limits
 			if thresholds[i] < 0.02:
 				thresholds[i] = 0.02
@@ -40,20 +39,22 @@ class NimPlusConfig():
 			dac_i += i*(2**12)
 			dacData.append(dac_i)
 		self.bytestream = struct.pack('<8I', *dacData)
-		self.bytestream += bytearray(self.config['deadtime'])
-		self.bytestream += bytearray(self.config['pulsewidth'])
+		self.bytestream += struct.pack('<I', self.config['deadtime'])
+		self.bytestream += struct.pack('<I', self.config['pulsewidth'])
 		self.bytestream += struct.pack('<8I', *self.config['outputlogic']['output_1'])
 		self.bytestream += struct.pack('<8I', *self.config['outputlogic']['output_2'])
 		self.bytestream += struct.pack('<8I', *self.config['outputlogic']['output_3'])
 		self.bytestream += struct.pack('<8I', *self.config['outputlogic']['output_4'])
-		self.bytestream += bytearray(self.config['updateParams'])
-		self.bytestream += bytearray(self.config['pauseCount'])
+		self.bytestream += struct.pack('<I', self.config['updateParams'])
+		self.bytestream += struct.pack('<I', self.config['pauseCount'])
+		# print(self.bytestream)
 		
 		return self.bytestream
 
 class Counter():
 	def __init__(self):
 		self.counts = [0,0,0,0]
+		self.last_count = [0,0,0,0]
 		self.msg_queue = Queue()
 		self.count_queue = Queue()
 		self.last_read = time.monotonic_ns()
@@ -70,7 +71,6 @@ class Counter():
 		conn, address = self.sock_count.accept()
 
 		while True:
-			print('start updating')
 			self.update(conn)
 
 
@@ -81,8 +81,10 @@ class Counter():
 	def update(self, conn):
 		buf = conn.recv(16)
 		self.convertBytestoCount(buf)
-		print(self.counts)
-		self.rates = [c/(self.last_read-time.monotonic_ns())/10**9 for c in self.counts]
+		# print(self.counts)
+		self.count_change = [self.counts[i]-self.last_count[i] for i in range(4)]
+		self.rates = [(c/(time.monotonic_ns()-self.last_read))*10**(9) for c in self.count_change]
+		self.last_count = self.counts
 		
 		self.last_read = time.monotonic_ns()
 
@@ -96,7 +98,5 @@ class Counter():
 
 	def get_counts(self):
 		msg = "get_counts"
-		print(msg)
 		self.msg_queue.put(msg)
 		(self.counts, self.rates) = self.count_queue.get()
-		print('count_got')
