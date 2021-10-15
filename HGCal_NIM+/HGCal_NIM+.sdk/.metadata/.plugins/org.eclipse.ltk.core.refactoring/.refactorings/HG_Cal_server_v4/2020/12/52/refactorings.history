@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;HG_Cal_server_v4/src/helloworld.c&apos; to &apos;HG_Cal_server_v4.c&apos;" description="Rename resource &apos;helloworld.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/helloworld.c" name="HG_Cal_server_v4.c" stamp="1608926518623" updateReferences="true"/>
+</session>

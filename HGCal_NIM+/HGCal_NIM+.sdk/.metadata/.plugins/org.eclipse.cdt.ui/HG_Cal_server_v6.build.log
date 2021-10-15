@@ -1,0 +1,29 @@
+00:33:08 **** Auto Build of configuration Debug for project HG_Cal_server_v6 ****
+make all 
+'Building file: ../src/HG_Cal_server_v6.c'
+'Invoking: ARM v7 Linux gcc compiler'
+arm-linux-gnueabihf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/HG_Cal_server_v6.o" -MMD -MP -MF"src/HG_Cal_server_v6.d" -MT"src/HG_Cal_server_v6.o" -o "src/HG_Cal_server_v6.o" "../src/HG_Cal_server_v6.c"
+../src/HG_Cal_server_v6.c: In function 'main':
+../src/HG_Cal_server_v6.c:279:61: warning: pointer targets in passing argument 3 of 'accept' differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
+                                                             ^~~~~~~
+In file included from ../src/HG_Cal_server_v6.c:3:
+c:\xilinx\sdk\2019.1\gnu\aarch32\nt\gcc-arm-linux-gnueabi\arm-linux-gnueabihf\libc\usr\include\sys\socket.h:232:12: note: expected 'socklen_t * restrict' {aka 'unsigned int * restrict'} but argument is of type 'int *'
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^~~~~~
+'Finished building: ../src/HG_Cal_server_v6.c'
+' '
+'Building target: HG_Cal_server_v6.elf'
+'Invoking: ARM v7 Linux gcc linker'
+arm-linux-gnueabihf-gcc  -o "HG_Cal_server_v6.elf"  ./src/HG_Cal_server_v6.o   
+'Finished building target: HG_Cal_server_v6.elf'
+' '
+'Invoking: ARM v7 Linux Print Size'
+arm-linux-gnueabihf-size HG_Cal_server_v6.elf  |tee "HG_Cal_server_v6.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+   5361	    364	      8	   5733	   1665	HG_Cal_server_v6.elf
+'Finished building: HG_Cal_server_v6.elf.size'
+' '
+
+00:33:09 Build Finished (took 871ms)
+
